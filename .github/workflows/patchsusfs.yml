@@ -32,7 +32,7 @@ jobs:
         
     - name: Run Script
       run: |
-        bash $(pwd)/build.sh
+        patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch 
       working-directory: kernel_root
       
     - name: Upload AnyKernel3
