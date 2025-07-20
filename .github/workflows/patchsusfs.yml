@@ -30,7 +30,11 @@ jobs:
         sudo apt install bc cpio git tar perl wget aria2 curl lz4 -y
       
         
-    
+    - name: Run Script
+      run: |
+        patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch 
+      
+      working-directory: kernel_root
       
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
