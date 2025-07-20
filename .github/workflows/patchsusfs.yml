@@ -32,7 +32,7 @@ jobs:
         
     - name: Fetch toolchains
       run: |
-           patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch
+           bash $(pwd)/build.sh
       working-directory: kernel_root    
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
