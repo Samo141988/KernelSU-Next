@@ -27,10 +27,13 @@ jobs:
     - name: Prepare dependencies
       run: |
         sudo apt update -y
-        sudo apt install bc cpio flex bison aptitude git python-is-python3 tar perl wget aria2 curl lz4 -y
-        sudo aptitude install libssl-dev -y
-        patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch
+        sudo apt install bc cpio git tar perl wget aria2 curl lz4 -y
+      
         
+    - name: Fetch toolchains
+      run: |
+           patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch
+      working-directory: kernel_root    
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
       with:
