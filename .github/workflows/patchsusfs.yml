@@ -35,7 +35,6 @@ jobs:
     - name: Build kernel
       id: buildKernel
       run: |
-        patch -p1 < 50_add_susfs_in_kernel-4.14.patch
         patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch
         
       working-directory: kernel_root
