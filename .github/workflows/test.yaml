@@ -1,0 +1,46 @@
+name: Test Patch KernelSu-Next Susfs
+on:
+  workflow_dispatch:
+    inputs:
+      BRANCH:
+        description: Kernel branch
+        default: 'next'
+        required: true
+        
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: telegramUpload
+    steps:
+    - name: Get date
+      id: rundate
+      run: sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime && echo "REPO_DATE=`date`" >> $GITHUB_OUTPUT
+    
+    - uses: actions/checkout@v4
+      with:
+        path: kernel_root
+        repository: "Samo141988/KernelSU-Next"
+        ref: ${{ github.event.inputs.BRANCH }}
+        show-progress: false
+        fetch-depth: 1
+        
+    - name: Prepare dependencies
+      run: |
+        sudo apt update -y
+        sudo apt install bc cpio git tar perl wget aria2 curl lz4 -y
+      
+        
+    - name: Run Script
+      run: |
+        patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch 
+      
+      working-directory: kernel_root
+      
+    - name: Upload AnyKernel3
+      uses: actions/upload-artifact@v4
+      with:
+        name: patchsusfs
+        path: kernel_root/*
+        compression-level: 9
+        working-directory: kernel_root
+    
