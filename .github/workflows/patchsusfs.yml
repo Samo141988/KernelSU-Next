@@ -42,5 +42,5 @@ jobs:
         name: patchsusfs
         path: kernel_root/*
         compression-level: 9
-        
+        working-directory: kernel_root
     
