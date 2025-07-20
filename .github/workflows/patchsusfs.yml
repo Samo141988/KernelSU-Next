@@ -29,22 +29,13 @@ jobs:
         sudo apt update -y
         sudo apt install bc cpio flex bison aptitude git python-is-python3 tar perl wget aria2 curl lz4 -y
         sudo aptitude install libssl-dev -y
-        
-    
-        
-    - name: Build kernel
-      id: buildKernel
-      run: |
         patch -p1 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch
         
-      working-directory: kernel_root
-      
-    
     - name: Upload AnyKernel3
       uses: actions/upload-artifact@v4
       with:
-        name: AnyKernel3-${{ steps.buildKernel.outputs.buildDetails }}
-        path: kernel_root/AnyKernel3/*
+        name: patchsusfs
+        path: kernel_root/*
         compression-level: 9
         
     
