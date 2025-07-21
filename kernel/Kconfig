@@ -13,7 +13,7 @@ config KSU_KPROBES_HOOK
 	bool "Use kprobes for kernelsu"
 	depends on KSU
 	depends on KPROBES
-	default y
+	default n
 	help
 	  Disable if you use manual hooks.
 
@@ -35,7 +35,7 @@ config KSU_ALLOWLIST_WORKAROUND
 config KSU_LSM_SECURITY_HOOKS
 	bool "use lsm security hooks"
         depends on KSU
-        default y
+        default n
 	help
 	  Disabling this is mostly only useful for kernel 4.1 and older.
 	  Make sure to implement manual hooks on security/security.c.
@@ -131,7 +131,7 @@ config KSU_SUSFS_SPOOF_UNAME
 config KSU_SUSFS_ENABLE_LOG
     bool "Enable logging susfs log to kernel"
     depends on KSU_SUSFS
-    default y
+    default n
     help
       - Allow logging susfs log to kernel, uncheck it to completely disable all susfs log.
 
