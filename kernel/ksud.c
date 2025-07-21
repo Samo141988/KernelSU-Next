@@ -69,6 +69,10 @@ bool ksu_devpts_hook = false;
 bool susfs_is_sus_su_ready = false;
 #endif // #ifdef CONFIG_KSU_SUSFS_SUS_SU
 
+#ifdef CONFIG_COMPAT
+bool ksu_is_compat __read_mostly = false;
+#endif
+
 u32 ksu_devpts_sid;
 
 void ksu_on_post_fs_data(void)
@@ -111,7 +115,7 @@ static const char __user *get_user_arg_ptr(struct user_arg_ptr argv, int nr)
 
 		if (get_user(compat, argv.ptr.compat + nr))
 			return ERR_PTR(-EFAULT);
-
+                ksu_is_compat = true;
 		return compat_ptr(compat);
 	}
 #endif
